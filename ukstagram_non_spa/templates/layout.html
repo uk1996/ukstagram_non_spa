@@ -1,3 +1,5 @@
+{% load static %}
+
 <!doctype html>
 <html lang="ko">
 <head>
@@ -6,9 +8,96 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ukstagram layout</title>
+    <link rel="stylesheet" href="{% static "bootstrap-5.1.3-dist/css/bootstrap.css" %}">
+    <script src="{% static "jquery-3.6.0.min.js" %}"></script>
+    <script src="{% static "bootstrap-5.1.3-dist/js/bootstrap.js" %}"></script>
 </head>
 <body>
-    {% block content %}
-    {% endblock content %}
+<div class="border-bottom mb-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="d-flex flex-column flex-md-row align-items-center pb-1">
+                    <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+                        <img src="{% static "logo.png" %}" alt="Ukstagram">
+                    </a>
+
+                    <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+                        <a class="me-3 py-2 text-dark text-decoration-none" href="/explore/">
+                            <svg aria-label="사람 찾기" class="_8-yf5 " color="#262626" fill="#262626" height="24"
+                                 role="img" viewBox="0 0 24 24" width="24">
+                                <polygon fill="none"
+                                         points="13.941 13.953 7.581 16.424 10.06 10.056 16.42 7.585 13.941 13.953"
+                                         stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                         stroke-width="2"></polygon>
+                                <polygon fill-rule="evenodd"
+                                         points="10.06 10.056 13.949 13.945 7.581 16.424 10.06 10.056"></polygon>
+                                <circle cx="12.001" cy="12.005" fill="none" r="10.5" stroke="currentColor"
+                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle>
+                            </svg>
+                        </a>
+                        <a class="me-3 py-2 text-dark text-decoration-none" href="accounts/activity/">
+                            <svg aria-label="활동 피드" class="_8-yf5 " color="#262626" fill="#262626" height="24"
+                                 role="img" viewBox="0 0 24 24" width="24">
+                                <path d="M16.792 3.904A4.989 4.989 0 0121.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 014.708-5.218 4.21 4.21 0 013.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 013.679-1.938m0-2a6.04 6.04 0 00-4.797 2.127 6.052 6.052 0 00-4.787-2.127A6.985 6.985 0 00.5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 003.518 3.018 2 2 0 002.174 0 45.263 45.263 0 003.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 00-6.708-7.218z"></path>
+                            </svg>
+                        </a>
+                        <a class="me-3 py-2 text-dark text-decoration-none" href="#">Profile</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% block content %}
+{% endblock content %}
+
+<div class="border-top">
+    <div class="container">
+        <footer class="pt-4 my-md-5 pt-md-5">
+            <div class="row">
+                <div class="col-12 col-md">
+                    <img class="mb-2" src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="24" height="19">
+                    <small class="d-block mb-3 text-muted">© 2017–2021</small>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Features</h5>
+                    <ul class="list-unstyled text-small">
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Cool stuff</a></li>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Random feature</a></li>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Team feature</a></li>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Stuff for
+                            developers</a>
+                        </li>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another one</a></li>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Last time</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled text-small">
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource</a></li>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource name</a></li>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another resource</a>
+                        </li>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Final resource</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>About</h5>
+                    <ul class="list-unstyled text-small">
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Team</a></li>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Locations</a></li>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Privacy</a></li>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
 </body>
 </html>
