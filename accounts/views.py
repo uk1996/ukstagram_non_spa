@@ -18,7 +18,7 @@ def signup(request):
         'form':form,
     })
 
-login = LoginView.as_view(template_name='accounts/login_form.html')
+login = LoginView.as_view(template_name='accounts/login_form.html', next_page = 'root')
 
 def logout(request):
     messages.success(request, '로그아웃 되었습니다.')
