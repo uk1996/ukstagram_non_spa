@@ -1,11 +1,21 @@
 {% load bootstrap4 %}
 
-<form action="" method="Post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    {% buttons %}
-        <button type="submit" class="btn btn-primary" style="margin-top: 5px; margin-bottom: 5px;">
-            {{ submit_label|default:"submit" }}
-        </button>
-    {% endbuttons %}
-</form>
+
+<div class="card">
+    {% if form_title %}
+        <div class="card-header">
+            {{ form_title }}
+        </div>
+    {% endif %}
+    <div class="card-body">
+        <form action="" method="Post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary" style="margin-top: 10px">
+                    {{ submit_label|default:"submit" }}
+                </button>
+            {% endbuttons %}
+        </form>
+    </div>
+</div>
