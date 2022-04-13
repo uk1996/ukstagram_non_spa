@@ -55,9 +55,9 @@
                         </a>
                         {% if user.is_authenticated %}
                             <a class="me-3 py-2 text-dark text-decoration-none" href="#">
-                                {{ user }}
                                 <img src="{% url 'pydenticon_image' data=user.username %}"
                                      style="width: 30px; height: 30px">
+                                {{ user }}
                             </a>
                         {% endif %}
                     </nav>
