@@ -7,6 +7,9 @@
                 {% include "form.html" with form_title="프로필" submit_label="프로필 수정" %}
             </div>
         </div>
+        <div style="text-align: center;">
+            <a href="{% url "accounts:password_change" %}" class="btn" style="color: gray;">비밀번호 변경</a>
+        </div>
     </div>
 
 {% endblock content %}

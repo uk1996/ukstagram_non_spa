@@ -1,6 +1,8 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import (UserCreationForm,
+                                       PasswordChangeForm as AuthPasswordChangeForm)
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 
 User = get_user_model()
@@ -29,3 +31,11 @@ class ProfileForm(ModelForm):
     class Meta:
         model = User
         fields = ['avatar', 'gender', 'phone_number', 'first_name', 'last_name', 'email', 'website_url', 'bio']
+
+class PasswordChangeForm(AuthPasswordChangeForm):
+    def clean_new_password2(self):
+        old_password = self.cleaned_data.get('old_password')
+        new_password2 = super().clean_new_password2()
+        if old_password == new_password2:
+            raise ValidationError('새로운 비밀번호가 기존 비밀번호와 같습니다.')
+        return new_password2
