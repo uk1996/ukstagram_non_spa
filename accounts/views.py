@@ -3,7 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login
-from django.contrib.auth.views import (LoginView, LogoutView, logout_then_login,
+from django.contrib.auth.views import (LoginView as AuthLoginView,
+                                         LogoutView, logout_then_login,
                                        PasswordChangeView as AuthPasswordChangeView)
 from django.urls import reverse_lazy
 
@@ -23,10 +24,18 @@ def signup(request):
         'form':form,
     })
 
+class LoginView(AuthLoginView):
+    template_name = 'accounts/login_form.html'
+    next_page = 'root'
+
+    def form_valid(self, form):
+        messages.success(self.request, '로그인 하였습니다.')
+        return super().form_valid(form)
+
 login = LoginView.as_view(template_name='accounts/login_form.html', next_page = 'root')
 
 def logout(request):
-    messages.success(request, '로그아웃 되었습니다.')
+    messages.success(request, '로그아웃 하였습니다.')
     return logout_then_login(request)
 
 
