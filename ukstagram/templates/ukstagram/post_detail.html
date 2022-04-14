@@ -1,0 +1,27 @@
+{% extends "ukstagram/layout.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <img src="{{ post.author.avatar_url }}" style="width: 30px; height: 30px; border-radius: 5px;">
+                        {{ post.author.name }}
+                    </div>
+                    <div class="card-body" style="padding-bottom: 10px">
+                        <div><img src="{{ post.photo.url }}" style="width: 100%;"><br></div>
+                        <p style="margin-bottom:0px; margin-top: 10px;"> {{ post.caption }} </p>
+                    </div>
+                    <div class="card-footer">
+                        {% for tag in post.tag_set.all %}
+                            <span class="badge" style="color: black">
+                                #{{ tag.name }}
+                            </span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
