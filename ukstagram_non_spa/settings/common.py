@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'django_pydenticon',
     # local Apps
     'accounts',
+    'ukstagram',
 ]
 
 MIDDLEWARE = [
