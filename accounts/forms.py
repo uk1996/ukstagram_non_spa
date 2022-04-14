@@ -19,13 +19,13 @@ class SignupForm(UserCreationForm):
         fields = ['username']
 
     # 이메일 중복 막기
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
-        if email:
-            qs = User.objects.filter(email=email)
-            if qs.exists():
-                raise forms.ValidationError('이미 등록된 email입니다')
-        return email
+    # def clean_email(self):
+    #     email = self.cleaned_data.get('email')
+    #     if email:
+    #         qs = User.objects.filter(email=email)
+    #         if qs.exists():
+    #             raise forms.ValidationError('이미 등록된 email입니다')
+    #     return email
 
 class ProfileForm(ModelForm):
     class Meta:
