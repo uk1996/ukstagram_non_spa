@@ -1,0 +1,31 @@
+{% extends "ukstagram/layout.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row pt-3 pb-3">
+            <div class="col-sm-3" style="text-align: right; padding-right: 20px;">
+                <img src="{{ page_user.avatar_url }}" style="width: 160px; height:160px; border-radius: 5px">
+            </div>
+            <div class="col-sm-9">
+                {{ page_user.username }}
+                {% if user == page_user %}
+                    <a href="{% url 'accounts:profile_edit' %}" class="btn btn-secondary btn-sm">Edit Profile</a>
+                {% endif %}
+                <hr>
+                0 posts, 0 followers, 0 following
+                <hr>
+                {{ page_user.name }}
+            </div>
+            <div class="row mt-5">
+                {% for post in post_list %}
+                    <div class="col-sm-4">
+                        <a href="{% url "ukstagram:post_detail" pk=post.pk %}">
+                        <img src="{{ post.photo.url }}" alt="{{ post.caption }}" style="width: 100%;">
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

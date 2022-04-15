@@ -1,8 +1,11 @@
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import PostForm
-from .models import Post, Tag
+from .models import Post
+
+
 
 @login_required
 def post_new(request):
@@ -28,4 +31,15 @@ def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'ukstagram/post_detail.html', {
         'post':post,
+    })
+
+
+@login_required()
+def user_page(request, username):
+    page_user = get_object_or_404(get_user_model(), username=username,
+                                  is_active=True) # 해당 계정이 활성화 되어있을 경우만 접근 가능
+    post_list = Post.objects.filter(author=page_user)[::-1]
+    return render(request, 'ukstagram/user_page.html', {
+        'page_user':page_user,
+        'post_list':post_list,
     })
