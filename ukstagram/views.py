@@ -4,12 +4,15 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import PostForm
 from .models import Post
+from django.db.models import Q
 
 @login_required
 def index(request):
+    post_list = Post.objects.filter(Q(author__in=request.user.following_set.all()) | Q(author=request.user))
     suggested_user_list = get_user_model().objects.exclude(pk=request.user.pk)\
                                                   .exclude(pk__in=request.user.following_set.all())[:5]
     return render(request, 'ukstagram/index.html', {
+        'post_list':post_list[::-1],
         'suggested_user_list':suggested_user_list,
     })
 

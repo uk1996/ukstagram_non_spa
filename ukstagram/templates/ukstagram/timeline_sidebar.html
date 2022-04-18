@@ -1,9 +1,13 @@
 <div class="d-flex p-2 mb-3">
     <div class="me-2">
-        <img src="{{ user.avatar_url }}" style="width: 48px; height: 48px; border-radius: 5px;">
+        <a href={% url "ukstagram:user_page" username=user.username %}>
+            <img src="{{ user.avatar_url }}" style="width: 48px; height: 48px; border-radius: 5px;">
+        </a>
     </div>
     <div>
-        {{ user.username }}<br>
+        <a class="text-dark text-decoration-none" href={% url "ukstagram:user_page" username=user.username %}>
+            {{ user.username }}<br>
+        </a>
         <small class="text-muted">{{ user.name }}</small>
     </div>
 </div>

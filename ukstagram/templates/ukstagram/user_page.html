@@ -21,7 +21,7 @@
                 {% for post in post_list %}
                     <div class="col-sm-4 mb-3">
                         <a href="{% url "ukstagram:post_detail" pk=post.pk %}">
-                        <img src="{% thumbnail post.photo 300x300 crop %}" alt="{{ post.caption }}" style="width: 100%;">
+                        <img src="{% thumbnail post.photo 512x512 crop %}" alt="{{ post.caption }}" style="width: 100%;">
                         </a>
                     </div>
                 {% endfor %}
