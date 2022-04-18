@@ -38,8 +38,10 @@ def post_detail(request, pk):
 def user_page(request, username):
     page_user = get_object_or_404(get_user_model(), username=username,
                                   is_active=True) # 해당 계정이 활성화 되어있을 경우만 접근 가능
-    post_list = Post.objects.filter(author=page_user)[::-1]
+    post_list = Post.objects.filter(author=page_user)
+    post_list_count = post_list.count() # 실제 데이터베이스에 count 쿼리를 던짐
     return render(request, 'ukstagram/user_page.html', {
         'page_user':page_user,
-        'post_list':post_list,
+        'post_list':post_list[::-1],
+        'post_list_count':post_list_count,
     })
