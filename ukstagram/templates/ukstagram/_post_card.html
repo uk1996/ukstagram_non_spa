@@ -12,12 +12,12 @@
             {{ post.author }}
         </a>
     </div>
-    <div class="card-body">
+    <div class="card-body p-0">
         <a href="{% url "ukstagram:post_detail" pk=post.pk %}">
             <img src="{% thumbnail post.photo 512x512 crop %}" style="width: 100%;">
         </a>
     </div>
-    <div class="card-body pt-0">
+    <div class="card-body">
         <p style="margin: 0px;">{{ post.caption }}</p>
     </div>
     <div class="card-footer">
