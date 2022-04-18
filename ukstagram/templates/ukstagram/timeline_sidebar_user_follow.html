@@ -1,11 +1,15 @@
 <div class="d-flex mb-1">
-  <div class="me-2">
-      <img src="{{ friend_user.avatar_url }}" style="width: 32px; height: 32px; border-radius: 5px;">
-  </div>
-  <div>
-      {{ friend_user.username }}
-  </div>
-  <div class="ms-auto">
-      <a href="#" style="text-decoration-line: none;">Follow</a>
-  </div>
+    <div class="me-2">
+        <img src="{{ suggested_user.avatar_url }}" style="width: 32px; height: 32px; border-radius: 5px;">
+    </div>
+    <div>
+        {{ suggested_user.username }}
+    </div>
+    <div class="ms-auto">
+        {% if suggested_user in user.following_set.all %}
+            <a href="{% url "accounts:user_unfollow" username=suggested_user.username %}" style="text-decoration-line: none;">UnFollow</a>
+        {% else %}
+            <a href="{% url "accounts:user_follow" username=suggested_user.username %}" style="text-decoration-line: none;">Follow</a>
+        {% endif %}
+    </div>
 </div>

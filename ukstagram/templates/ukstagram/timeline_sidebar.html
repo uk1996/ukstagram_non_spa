@@ -17,11 +17,28 @@
     </div>
 </div>
 
+<div class="card mb-3">
+    <div class="card-header text-muted">
+        following
+    </div>
+    <div class="card-body text-muted">
+        {% for following_user in user.following_set.all|slice:":5" %}
+            {% include "ukstagram/timeline_sidebar_user_follow.html" with suggested_user=following_user %}
+        {% empty %}
+            팔로잉한 유저가 없습니다.
+        {% endfor %}
+    </div>
+</div>
+
 <div class="card">
     <div class="card-header text-muted">
         Suggestions for you
     </div>
     <div class="card-body text-muted">
-        {% include "ukstagram/timeline_sidebar_user_follow.html" with friend_user=user %}
+        {% for suggested_user in suggested_user_list %}
+            {% include "ukstagram/timeline_sidebar_user_follow.html" %}
+        {% empty %}
+            추천 친구가 없습니다.
+        {% endfor %}
     </div>
 </div>

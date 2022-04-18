@@ -12,8 +12,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('identicon/image/<path:data>/', pydenticon_image, name='pydenticon_image'),
     path('accounts/', include('accounts.urls')),
-    path('ukstagram', include('ukstagram.urls')),
-    path('', login_required(RedirectView.as_view(pattern_name='ukstagram:index'))),
+    path('ukstagram/', include('ukstagram.urls')),
+    path('', login_required(RedirectView.as_view(pattern_name='ukstagram:index')), name='root'),
 ]
 
 if settings.DEBUG:

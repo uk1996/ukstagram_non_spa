@@ -7,7 +7,11 @@ from .models import Post
 
 @login_required
 def index(request):
-    return render(request, 'ukstagram/index.html')
+    suggested_user_list = get_user_model().objects.exclude(pk=request.user.pk)\
+                                                  .exclude(pk__in=request.user.following_set.all())[:5]
+    return render(request, 'ukstagram/index.html', {
+        'suggested_user_list':suggested_user_list,
+    })
 
 @login_required
 def post_new(request):
@@ -36,7 +40,7 @@ def post_detail(request, pk):
     })
 
 
-@login_required()
+@login_required
 def user_page(request, username):
     page_user = get_object_or_404(get_user_model(), username=username,
                                   is_active=True) # 해당 계정이 활성화 되어있을 경우만 접근 가능

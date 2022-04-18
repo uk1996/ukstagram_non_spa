@@ -9,6 +9,8 @@ class User(AbstractUser):
         MALE = 'MALE', '남' # DB 저장 text, 화면에 보여지는 text
         FEMALE = 'FEMALE', '여'
 
+    following_set = models.ManyToManyField('self', blank=True, symmetrical=False, related_name='follower_set')
+
     website_url = models.URLField(blank=True)
     bio = models.TextField(blank=True, verbose_name='Introduction')
     phone_number = models.CharField(max_length=13, blank=True, validators=[RegexValidator(r"^010-?[1-9]\d{3}-?\d{4}$")])
