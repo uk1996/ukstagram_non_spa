@@ -1,15 +1,21 @@
 <div class="d-flex mb-1">
     <div class="me-2">
-        <img src="{{ suggested_user.avatar_url }}" style="width: 32px; height: 32px; border-radius: 5px;">
+        <a class="text-muted text-decoration-none" href="{% url "ukstagram:user_page" username=suggested_user.username %}">
+            <img src="{{ suggested_user.avatar_url }}" style="width: 32px; height: 32px; border-radius: 5px;">
+        </a>
     </div>
     <div>
-        {{ suggested_user.username }}
+        <a class="text-muted text-decoration-none" href="{% url "ukstagram:user_page" username=suggested_user.username %}">
+            {{ suggested_user.username }}
+        </a>
     </div>
     <div class="ms-auto">
         {% if suggested_user in user.following_set.all %}
-            <a href="{% url "accounts:user_unfollow" username=suggested_user.username %}" style="text-decoration-line: none;">UnFollow</a>
+            <a href="{% url "accounts:user_unfollow" username=suggested_user.username %}"
+               style="text-decoration-line: none;">UnFollow</a>
         {% else %}
-            <a href="{% url "accounts:user_follow" username=suggested_user.username %}" style="text-decoration-line: none;">Follow</a>
+            <a href="{% url "accounts:user_follow" username=suggested_user.username %}"
+               style="text-decoration-line: none;">Follow</a>
         {% endif %}
     </div>
 </div>
