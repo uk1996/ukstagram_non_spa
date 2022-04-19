@@ -11,9 +11,16 @@
                 {{ page_user.username }}
                 {% if user == page_user %}
                     <a href="{% url 'accounts:profile_edit' %}" class="btn btn-secondary btn-sm">Edit Profile</a>
+                {% elif is_follow %}
+                    <a href="{% url 'accounts:user_unfollow' username=page_user.username %}"
+                       class="btn btn-secondary btn-sm">UnFollow</a>
+                {% else %}
+                    <a href="{% url 'accounts:user_follow' username=page_user.username %}"
+                       class="btn btn-primary btn-sm">Follow</a>
                 {% endif %}
                 <hr>
-                {{ post_list_count }} posts, {{ page_user.follower_set.all.count }} followers, {{ page_user.following_set.all.count }} following
+                {{ post_list_count }} posts, {{ page_user.follower_set.all.count }}
+                followers, {{ page_user.following_set.all.count }} following
                 <hr>
                 {{ page_user.name }}
             </div>
@@ -21,7 +28,8 @@
                 {% for post in post_list %}
                     <div class="col-sm-4 mb-3">
                         <a href="{% url "ukstagram:post_detail" pk=post.pk %}">
-                        <img src="{% thumbnail post.photo 512x512 crop %}" alt="{{ post.caption }}" style="width: 100%;">
+                            <img src="{% thumbnail post.photo 512x512 crop %}" alt="{{ post.caption }}"
+                                 style="width: 100%;">
                         </a>
                     </div>
                 {% endfor %}

@@ -73,7 +73,7 @@ def user_follow(request, username):
     request.user.following_set.add(follow_user)
 
     messages.success(request, f"{follow_user}님을 팔로우했습니다.")
-    redirect_url = request.META.get('HTTP_REFERR', 'root')
+    redirect_url = request.META.get('HTTP_REFERER', 'root')
     return redirect(redirect_url)
 
 @login_required
@@ -84,5 +84,5 @@ def user_unfollow(request, username):
     request.user.following_set.remove(unfollow_user)
 
     messages.success(request, f"{unfollow_user}님을 언팔로우했습니다.")
-    redirect_url = request.META.get('HTTP_REFERR', 'root')
+    redirect_url = request.META.get('HTTP_REFERER', 'root')
     return redirect(redirect_url)
