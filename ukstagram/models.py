@@ -4,12 +4,20 @@ from django.urls import reverse
 import re
 
 
-class Post(models.Model):
+class BaseModel(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)  # 생성 시간
+    updated_at = models.DateTimeField(auto_now=True)  # 수정 시간
+
+    class Meta:
+        abstract = True
+
+class Post(BaseModel):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     photo = models.ImageField(upload_to='ukstagram/post/%Y/%m/%d')
     caption = models.TextField()
     tag_set = models.ManyToManyField('Tag', blank=True)
     location = models.CharField(max_length=100, blank=True)
+
 
     def __str__(self):
         return self.caption
