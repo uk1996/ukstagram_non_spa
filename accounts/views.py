@@ -32,7 +32,7 @@ class LoginView(AuthLoginView):
         messages.success(self.request, '로그인 하였습니다.')
         return super().form_valid(form)
 
-login = LoginView.as_view(template_name='accounts/login_form.html', next_page = 'root')
+login = LoginView.as_view()
 
 def logout(request):
     messages.success(request, '로그아웃 하였습니다.')
