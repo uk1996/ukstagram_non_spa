@@ -18,7 +18,7 @@ def index(request):
     suggested_user_list = get_user_model().objects.exclude(pk=request.user.pk)\
                                                   .exclude(pk__in=request.user.following_set.all())[:5]
     return render(request, 'ukstagram/index.html', {
-        'post_list':post_list[::-1],
+        'post_list':post_list,
         'suggested_user_list':suggested_user_list,
     })
 
@@ -63,7 +63,21 @@ def user_page(request, username):
 
     return render(request, 'ukstagram/user_page.html', {
         'page_user':page_user,
-        'post_list':post_list[::-1],
+        'post_list':post_list,
         'post_list_count':post_list_count,
         'is_follow':is_follow,
     })
+
+@login_required
+def post_like(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    request.user.like_post_set.add(post)
+    redirect_url = request.META.get('HTTP_REFERER', 'root')
+    return redirect(redirect_url)
+
+@login_required
+def post_unlike(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    request.user.like_post_set.remove(post)
+    redirect_url = request.META.get('HTTP_REFERER', 'root')
+    return redirect(redirect_url)

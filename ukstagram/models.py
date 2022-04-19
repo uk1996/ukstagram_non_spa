@@ -17,11 +17,13 @@ class Post(BaseModel):
     caption = models.TextField()
     tag_set = models.ManyToManyField('Tag', blank=True)
     location = models.CharField(max_length=100, blank=True)
+    like_user_set = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='like_post_set')
 
+    class Meta:
+        ordering = ['-id']
 
     def __str__(self):
         return self.caption
-
 
     def get_absolute_url(self):
         return reverse('ukstagram:post_detail', kwargs={'pk':self.pk})
