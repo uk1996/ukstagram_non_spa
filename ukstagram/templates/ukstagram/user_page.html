@@ -13,7 +13,7 @@
                     <a href="{% url 'accounts:profile_edit' %}" class="btn btn-secondary btn-sm">Edit Profile</a>
                 {% endif %}
                 <hr>
-                {{ post_list_count }} posts, {{ user.follower_set.all.count }} followers, {{ user.following_set.all.count }} following
+                {{ post_list_count }} posts, {{ page_user.follower_set.all.count }} followers, {{ page_user.following_set.all.count }} following
                 <hr>
                 {{ page_user.name }}
             </div>
