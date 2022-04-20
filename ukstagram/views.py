@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 from .models import Post
 from django.db.models import Q
 from dateutil.relativedelta import relativedelta
@@ -81,3 +81,21 @@ def post_unlike(request, pk):
     request.user.like_post_set.remove(post)
     redirect_url = request.META.get('HTTP_REFERER', 'root')
     return redirect(redirect_url)
+
+@login_required
+def comment_new(request, post_pk):
+    post = get_object_or_404(Post, pk=post_pk)
+
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            comment.save()
+            return redirect(comment.post)
+    else:
+        form = CommentForm()
+    return render(request, 'ukstagram/comment_form.html', {
+        'form':form,
+    })
