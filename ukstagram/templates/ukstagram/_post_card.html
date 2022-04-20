@@ -1,4 +1,4 @@
-{% load thumbnail ukstagram_tags humanize %}
+{% load thumbnail ukstagram_tags humanize bootstrap4 %}
 
 <div class="card">
     <div class="card-header">
@@ -69,9 +69,11 @@
                 </div>
             </div>
         {% endfor %}
-        <a class="text-decoration-none text-muted mt-2" href="{% url 'ukstagram:comment_new' post_pk=post.pk %}"
-           style="display: block;">
-            댓글 달기...
-        </a>
+
+        <form action="{% url "ukstagram:comment_new" post_pk=post.pk %}" method="POST">
+            {% csrf_token %}
+            {% bootstrap_form comment_form %}
+            <input type="submit" value="댓글 달기" class="btn btn-primary mt-2">
+        </form>
     </div>
 </div>

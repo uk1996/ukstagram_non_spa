@@ -12,14 +12,20 @@ from dateutil.relativedelta import relativedelta
 @login_required
 def index(request):
     timesince = timezone.now() - relativedelta(years=1)
+
+    comment_form = CommentForm()
+
     post_list = Post.objects\
         .filter(Q(author__in=request.user.following_set.all()) | Q(author=request.user))\
         .filter(created_at__gte=timesince)
+
     suggested_user_list = get_user_model().objects.exclude(pk=request.user.pk)\
                                                   .exclude(pk__in=request.user.following_set.all())[:5]
+
     return render(request, 'ukstagram/index.html', {
         'post_list':post_list,
         'suggested_user_list':suggested_user_list,
+        'comment_form':comment_form,
     })
 
 @login_required
@@ -44,8 +50,10 @@ def post_new(request):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
+    comment_form = CommentForm()
     return render(request, 'ukstagram/post_detail.html', {
         'post':post,
+        'comment_form':comment_form,
     })
 
 

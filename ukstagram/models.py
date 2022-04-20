@@ -50,6 +50,9 @@ class Comment(BaseModel):
     class Meta:
         ordering = ['-id']
 
+    def __str__(self):
+        return self.message
+
 class Tag(models.Model):
     name = models.CharField(max_length=50, unique=True)
 
