@@ -1,4 +1,5 @@
 {% load thumbnail %}
+{% load ukstagram_tags %}
 
 <div class="card">
     <div class="card-header">
@@ -19,7 +20,7 @@
     </div>
     <div class="card-body p-0 pt-2">
         <div class="d-flex ">
-            {% if post in user.like_post_set.all %}
+            {% if post|is_like_user:user %}
                 <a href="{% url 'ukstagram:post_unlike' pk=post.pk %}">
                     <div style=" padding-left: 20px;">
                         <svg aria-label="좋아요 취소" class="_8-yf5 " color="#ed4956" fill="#ed4956" height="24" role="img"
